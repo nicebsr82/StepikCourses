@@ -1,0 +1,40 @@
+import time
+import math
+from msilib.schema import CheckBox
+# webdriver это и есть набор команд для управления браузером
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+
+def calc(x):
+    return str(math.log(abs(12 * math.sin(int(x)))))
+
+
+
+link = "http://suninjuly.github.io/get_attribute.html"
+browser = webdriver.Chrome()
+browser.get(link)
+
+
+sunduk = browser.find_element(By.ID, "treasure")
+valuex = sunduk.get_attribute("valuex")
+y = calc(valuex)
+
+input1 = browser.find_element(By.ID, "answer") #значение в поле 
+input1.send_keys(y)
+
+robotCheckbox = browser.find_element(By.ID, "robotCheckbox") #поставить галочку 
+robotCheckbox.click()
+
+robotsRule= browser.find_element(By.ID, "robotsRule") #выбрать роботсрул
+robotsRule.click()
+
+submit= browser.find_element(By.CSS_SELECTOR, "body > div.container > form > div > div > button")
+submit.click() #нажать на кнопку Submit
+
+time.sleep(200)
+
+
+
+#robotCheckbox
+#robotsRule
+#.btn.btn-default[type='submit']
